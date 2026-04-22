@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: oklch(0.12 0.015 260);
+  --color-foreground: oklch(0.98 0.005 260);
+  
+  --color-primary: oklch(0.8 0.2 150); /* Neon Cyber Green */
+  --color-primary-foreground: oklch(0.2 0.05 150);
+  
+  --color-secondary: oklch(0.3 0.1 280); /* Deep Tech Purple */
+  --color-accent: oklch(0.7 0.2 200); /* Cyan Flare */
+  
+  --color-card: oklch(0.18 0.02 260 / 0.6);
+  --color-border: oklch(1 0 0 / 0.08);
+
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+
+  --shadow-premium: 0 8px 32px 0 oklch(0 0 0 / 0.4);
+}
+
+:root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color-scheme: dark;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+body {
+  margin: 0;
+  background: 
+    radial-gradient(circle at 0% 0%, oklch(0.25 0.1 280 / 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, oklch(0.8 0.2 150 / 0.05) 0%, transparent 50%),
+    var(--color-background);
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Premium Classes */
+.glass-panel {
+  background: var(--color-card);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-premium);
+}
+
+.glow-border {
+  position: relative;
+}
+
+.glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0.15;
+  filter: blur(4px);
+}
+
+.btn-cyber {
+  @apply relative px-6 py-2.5 rounded-lg font-bold tracking-tight transition-all duration-300
+         bg-primary text-primary-foreground shadow-premium
+         hover:brightness-110 hover:-translate-y-0.5 active:scale-95
+         disabled:opacity-40 disabled:cursor-not-allowed;
+}
+
+.nav-link {
+  @apply flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300
+         text-foreground/40 hover:text-foreground hover:bg-white/5;
+}
+
+.nav-link-active {
+  @apply text-primary bg-primary/10 border border-primary/20;
+  box-shadow: 0 0 20px oklch(0.8 0.2 150 / 0.1);
+}
+
+/* Animations */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.sidebar-gradient {
+  background: linear-gradient(180deg, oklch(0.15 0.02 260) 0%, oklch(0.1 0.015 260) 100%);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(1 0 0 / 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.8 0.2 150 / 0.3);
+}
